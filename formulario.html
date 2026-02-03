@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro Personas con Discapacidad</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#03800e;
+}
+.contenedor{
+    max-width:900px;
+    margin:20px auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,.15);
+}
+h2{
+    text-align:center;
+    color:#1b5e20;
+}
+.imagen{
+    text-align:center;
+}
+.imagen img{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #2e7d32;
+    box-shadow:0 0 15px rgba(0,0,0,.3);
+}
+label{
+    font-weight:bold;
+    margin-top:15px;
+    display:block;
+}
+input,select,textarea{
+    width:100%;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+textarea{
+    resize:vertical;
+}
+.fila{
+    display:flex;
+    gap:15px;
+}
+.col{
+    flex:1;
+}
+button{
+    width:220px;
+    padding:8px;
+    background:linear-gradient(135deg,#1b5e20,#66bb6a);
+    color:white;
+    border:none;
+    font-size:14px;
+    border-radius:6px;
+    margin:15px auto 0;
+    display:block;
+    cursor:pointer;
+}
+button:hover{
+    background:linear-gradient(135deg,#0d3b12,#43a047);
+}
+.btn-volver{
+    width:220px;
+    padding:8px;
+    margin:10px auto 0;
+    display:block;
+    text-align:center;
+    background:linear-gradient(135deg,#546e7a,#90a4ae);
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h2>Formulario de Registro</h2>
+
+<div class="imagen">
+    <img id="preview">
+</div>
+
+<form action="guardar.php" method="POST" enctype="multipart/form-data">
+
+<label>Fotografía</label>
+<input type="file" name="foto" accept="image/*" required onchange="previewImg(event)">
+
+<label>Nombre completo</label>
+<input type="text" name="nombre" required>
+
+<label>Dirección</label>
+<input type="text" name="direccion" required>
+
+<div class="fila">
+<div class="col">
+<label>Edad</label>
+<select name="edad" required>
+<option value="">Seleccione</option>
+<option>10 a 20</option>
+<option>20 a 30</option>
+<option>30 a 40</option>
+<option>40 o más</option>
+</select>
+</div>
+<div class="col">
+<label>Teléfono</label>
+<input type="tel" name="telefono" required>
+</div>
+</div>
+
+<label>CURP</label>
+<input type="text" name="curp" maxlength="18" required>
+
+<div class="fila">
+<div class="col">
+<label>Estado civil</label>
+<select name="estado_civil">
+<option>Soltero</option>
+<option>Casado</option>
+</select>
+</div>
+<div class="col">
+<label>Sexo</label>
+<select name="sexo">
+<option>Hombre</option>
+<option>Mujer</option>
+</select>
+</div>
+</div>
+
+<label>Escolaridad</label>
+<select name="escolaridad">
+<option>Primaria</option>
+<option>Secundaria</option>
+<option>Preparatoria</option>
+<option>Carrera técnica</option>
+<option>Universidad</option>
+<option>Diplomado</option>
+<option>Postgrado</option>
+</select>
+
+<label>Ocupación</label>
+<select name="ocupacion">
+<option>Familia</option>
+<option>Desempleado</option>
+<option>Estudiante</option>
+<option>Otro</option>
+</select>
+
+<label>Dependencia económica</label>
+<select name="dependencia">
+<option>Familia</option>
+<option>Padres</option>
+<option>Organismo federal</option>
+<option>Organismo estatal</option>
+<option>Organismo municipal</option>
+</select>
+
+<label>Causa de la discapacidad</label>
+<select name="causa" id="causa" onchange="mostrarExplicacion()" required>
+<option value="">Seleccione una opción</option>
+<option value="congenita">Congénita</option>
+<option value="enfermedad">Enfermedad</option>
+<option value="accidente_laboral">Accidente laboral</option>
+<option value="transito">Accidente de tránsito</option>
+<option value="violencia">Violencia</option>
+<option value="edad">Edad avanzada</option>
+<option value="otra">Otra</option>
+</select>
+
+<textarea name="detalle_causa" id="explicacion" rows="4"
+style="display:none; margin-top:10px;"></textarea>
+
+<label>Temporalidad</label>
+<select name="temporalidad">
+<option>Temporal</option>
+<option>Permanente</option>
+</select>
+
+<label>Aparato ortopédico</label>
+<select name="aparato" id="aparato" onchange="mostrarAparato()">
+<option value="">Seleccione</option>
+<option>Silla de ruedas</option>
+<option>Andadera</option>
+<option>Muletas</option>
+<option>Perro guía</option>
+<option>Tablero Braille NASTON</option>
+<option>Auricular para debilidad auditiva</option>
+<option value="otro">Otro</option>
+</select>
+
+<input type="text" name="otro_aparato" id="otroAparato"
+placeholder="Especifique"
+style="display:none; margin-top:10px;">
+
+<label>Seguridad social</label>
+<select name="seguridad">
+<option>Población abierta</option>
+<option>IMSS</option>
+<option>IMSS Bienestar</option>
+<option>ISSSTE</option>
+<option>Seguro privado</option>
+</select>
+
+<label>Atención institucional</label>
+<select name="atencion" id="atencion" onchange="mostrarAtencion()">
+<option>DIF Estatal</option>
+<option>DIF Municipal</option>
+<option>CREE Tepic</option>
+<option value="otro">Otro</option>
+</select>
+
+<input type="text" name="otra_atencion" id="otraAtencion"
+placeholder="Especifique"
+style="display:none; margin-top:10px;">
+
+<label>¿Pertenece a asociación?</label>
+<select name="asociacion">
+<option>No</option>
+<option>Sí</option>
+</select>
+
+<label>Nombre de la asociación</label>
+<input type="text" name="nombre_asociacion">
+
+<button type="submit">Registrar</button>
+<a href="index.html" class="btn-volver">⬅ Volver al inicio</a>
+
+</form>
+</div>
+
+<script>
+function previewImg(e){
+    document.getElementById("preview").src = URL.createObjectURL(e.target.files[0]);
+}
+
+function mostrarExplicacion(){
+  const causa = document.getElementById("causa").value;
+  const caja = document.getElementById("explicacion");
+
+  if(causa === "accidente_laboral" || causa === "transito" || causa === "violencia" || causa === "otra"){
+    caja.style.display = "block";
+  }else{
+    caja.style.display = "none";
+    caja.value = "";
+  }
+}
+
+function mostrarAparato(){
+  document.getElementById("otroAparato").style.display =
+  (document.getElementById("aparato").value === "otro") ? "block" : "none";
+}
+
+function mostrarAtencion(){
+  document.getElementById("otraAtencion").style.display =
+  (document.getElementById("atencion").value === "otro") ? "block" : "none";
+}
+</script>
+
+</body>
+</html>
