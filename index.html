@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Registro Municipal de Personas con Discapacidad | Tuxpan, Nayarit</title>
+
+  <!-- FUENTE -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1b5e20">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Registro Discapacidad">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    html, body{
+      height:100%;
+    }
+
+    body{
+      display:flex;
+      flex-direction:column;
+      background:#f4f6f8;
+      color:#333;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:#099a06;
+      padding:23px 36px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+    }
+
+    nav h1{
+      color:#fff;
+      font-size:20px;
+    }
+
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:20px;
+    }
+
+    nav ul li a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:500;
+    }
+
+    nav ul li a:hover{
+      text-decoration:underline;
+    }
+
+    main{
+      flex:1;
+    }
+
+    /* ===== CARRUSEL ===== */
+    .slider{
+      margin-top:95px;
+      width:100%;
+      overflow:hidden;
+    }
+
+    .slides{
+      display:flex;
+      align-items:center;
+      gap:40px;
+      width:max-content;
+      animation: scroll 40s linear infinite;
+    }
+
+    @keyframes scroll{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-360vw); }
+    }
+
+    .slides img{
+      width:70vw;
+      max-width:900px;
+      height:420px;
+      object-fit:contain;
+      background:#ffffff;
+      padding:10px;
+      border:4px solid #ffffff;
+      outline:4px solid #099a06;
+      border-radius:14px;
+      box-shadow:0 12px 30px rgba(0,0,0,.25);
+    }
+
+    /* ===== VIDEO ===== */
+    .video-section{
+      display:flex;
+      justify-content:center;
+      margin:60px 0;
+    }
+
+    .video-box{
+      width:80%;
+      max-width:900px;
+      background:#ffffff;
+      padding:15px;
+      border-radius:16px;
+      border:4px solid #ffffff;
+      outline:4px solid #099a06;
+      box-shadow:0 12px 30px rgba(0,0,0,.25);
+    }
+
+    .video-box video{
+      width:100%;
+      border-radius:10px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer{
+      background:#034f18;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      margin-top:auto;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){
+      nav{
+        flex-direction:column;
+        gap:10px;
+      }
+
+      nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .slides img{
+        width:90vw;
+        height:260px;
+      }
+
+      .video-box{
+        width:95%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h1>Registro Municipal de Discapacidad</h1>
+  <ul>
+    <li><a href="mision-vision.php">Misión y Visión</a></li>
+    <li><a href="proposito.php">Propósito</a></li>
+    <li><a href="ley.php">Ley de Discapacidad</a></li>
+    <li><a href="formulario.html">Registro</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- CARRUSEL -->
+  <div class="slider">
+    <div class="slides">
+      <img src="img/escudo.jpg" alt="Escudo Municipal">
+      <img src="img/gt.jpg" alt="Gestión Inclusiva">
+      <img src="img/portada-3.jpg" alt="Inclusión Social">
+      <img src="img/registro.png" alt="Registro Municipal">
+
+      <img src="img/escudo.jpg" alt="">
+      <img src="img/gt.jpg" alt="">
+      <img src="img/portada-3.jpg" alt="">
+      <img src="img/registro.png" alt="">
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <div class="video-box">
+      <video controls>
+        <source src="video/video1.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 | Registro Municipal de Personas con Discapacidad<br>
+  Tuxpan, Nayarit
+</footer>
+
+<!-- SERVICE WORKER -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("PWA instalada correctamente"))
+      .catch(err => console.error("Error PWA:", err));
+  });
+}
+</script>
+
+</body>
+</html>
